@@ -44,47 +44,113 @@
 //
 // };
 
-var usedVehiclesObject = {
-    makes: [
+
+// var usedVehiclesObject = {
+//     makes: [
+//         {
+//             "nm": "Toyota",
+//             "md": [{ "nm": "Camry" }, { "nm": "Prius"} ]
+//         },
+//         {
+//             "nm": "Honda",
+//             "md": [{ "nm": "Accord" }, { "nm": "Civic"} ]
+//         },
+//         {
+//             "nm": "BMW",
+//             "md": [{ "nm": "3-Series" }]
+//         }
+//     ]
+// }
+// window.onload = function () {
+//     var makeSelect = document.getElementById("makeSelect");
+//     var modelSelect = document.getElementById("modelSelect");
+//     var trimSelect = document.getElementById("trimSelect");
+//
+//     for (var i = 0; i < usedVehiclesObject.makes.length; i++) {
+//         makeSelect.options[makeSelect.options.length] = new Option(usedVehiclesObject.makes[i].nm, usedVehiclesObject.makes[i].nm);
+//     }
+//
+//     makeSelect.onchange = function () {
+//         trimSelect.length = 1; // remove all options bar first
+//         modelSelect.length = 1; // remove all options bar first
+//         if (this.selectedIndex < 1) return; // done
+//         for (var i = 0; i < usedVehiclesObject.makes[this.selectedIndex - 1].md.length; i++) {
+//             // console.log(usedVehiclesObject.makes[this.selectedIndex - 1].md);
+//             // console.log(this.selectedIndex);
+//             modelSelect.options[modelSelect.options.length] = new Option(usedVehiclesObject.makes[this.selectedIndex - 1].md[i].nm, usedVehiclesObject.makes[this.selectedIndex - 1].md[i].nm);
+//         }
+//     }
+//
+// };
+
+var wholeMvisObject = {
+    "stockTypes": [
         {
-            "nm": "Toyota",
-            "md": [{ "nm": "Camry" }, { "nm": "Prius"} ]
+            // used: {
+                nm: "used",
+                makes: [
+                    {
+                        "nm": "AM General",
+                        "md": [{ "nm": "Hummer" }, { "nm": "H2"} ]
+                    },
+                    {
+                        "nm": "BMW",
+                        "md": [{ "nm": "Z3" }]
+                    }
+                ]
+            // }
         },
         {
-            "nm": "Honda",
-            "md": [{ "nm": "Accord" }, { "nm": "Civic"} ]
-        },
-        {
-            "nm": "BMW",
-            "md": [{ "nm": "3-Series" }]
+            // new: {
+                nm: "new",
+                makes: [
+                    {
+                        "nm": "Toyota",
+                        "md": [{ "nm": "Camry" }, { "nm": "Prius"} ]
+                    },
+                    {
+                        "nm": "Honda",
+                        "md": [{ "nm": "Accord" }, { "nm": "Civic"} ]
+                    },
+                    {
+                        "nm": "BMW",
+                        "md": [{ "nm": "3-Series" }]
+                    }
+                ]
+            // }
         }
     ]
 }
 
 
 window.onload = function () {
-  var makeSelect = document.getElementById("makeSelect");
-  var modelSelect = document.getElementById("modelSelect");
-  var trimSelect = document.getElementById("trimSelect");
+    var stockTypeSelect = document.getElementById("stockTypeSelect");
+    var makeSelect = document.getElementById("makeSelect");
+    var modelSelect = document.getElementById("modelSelect");
 
-  //
-  // for (var make in vehiclesObject) {
-  //       makeSelect.options[makeSelect.options.length] = new Option(make, make);
-  // }
+    console.log(wholeMvisObject.stockTypes.length);
+    for (var i = 0; i < wholeMvisObject.stockTypes.length; i++) {
+        stockTypeSelect.options[stockTypeSelect.options.length] = new Option(wholeMvisObject.stockTypes[i].nm, wholeMvisObject.stockTypes[i].nm);
+    }
 
-  for (var i = 0; i < usedVehiclesObject.makes.length; i++) {
-      makeSelect.options[makeSelect.options.length] = new Option(usedVehiclesObject.makes[i].nm, usedVehiclesObject.makes[i].nm);
-  }
-
-  makeSelect.onchange = function () {
-        trimSelect.length = 1; // remove all options bar first
+    stockTypeSelect.onchange = function () {
         modelSelect.length = 1; // remove all options bar first
+        makeSelect.length = 1; // remove all options bar first
         if (this.selectedIndex < 1) return; // done
-        for (var i = 0; i < usedVehiclesObject.makes[this.selectedIndex - 1].md.length; i++) {
+        for (var i = 0; i < wholeMvisObject.stockTypes[this.selectedIndex - 1].makes.length; i++) {
             // console.log(usedVehiclesObject.makes[this.selectedIndex - 1].md);
             // console.log(this.selectedIndex);
-            modelSelect.options[modelSelect.options.length] = new Option(usedVehiclesObject.makes[this.selectedIndex - 1].md[i].nm, usedVehiclesObject.makes[this.selectedIndex - 1].md[i].nm);
+            makeSelect.options[makeSelect.options.length] = new Option(wholeMvisObject.stockTypes[this.selectedIndex - 1].makes[i].nm, wholeMvisObject.stockTypes[this.selectedIndex - 1].makes[i].nm);
         }
-  }
+    }
+    makeSelect.onchange = function () {
+        modelSelect.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        for (var i = 0; i < wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md.length; i++) {
+            // console.log(usedVehiclesObject.makes[this.selectedIndex - 1].md);
+            // console.log(this.selectedIndex);
+            modelSelect.options[modelSelect.options.length] = new Option(wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md[i].nm, wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md[i].nm);
+        }
+    }
 
 };
