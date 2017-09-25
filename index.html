@@ -7,7 +7,12 @@
     <body>
         <form name="myform" id="myForm">
             <select id="stockTypeSelect" size="1">
-                <option value="" selected="selected">All Stock Types</option>
+                <option value="all" data-linkname="SW Search Blended" selected="selected">New
+                    &amp; Used Cars
+                </option>
+                <option value="new" data-linkname="SW Search New">New Cars</option>
+                <option value="used" data-linkname="SW Search Used">Used Cars</option>
+                <option value="cpo" data-linkname="SW Search Certified">Certified Cars</option>
             </select>
             <select id="makeSelect" size="1">
                 <option value="" selected="selected">All Makes</option>
@@ -18,23 +23,4 @@
         </form>
     </body>
 </html>
-<!-- <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Vanilla JS Dropdown</title>
-    <script type="text/javascript" src="app.js"></script>
-</head>
-<body>
-    <form name="myform" id="myForm">
-    <select id="makeSelect" size="1">
-        <option value="" selected="selected">All Makes</option>
-    </select>
-    <select id="modelSelect" size="1">
-        <option value="" selected="selected">All Models</option>
-    </select>
-    <select id="trimSelect" size="1">
-       <option value="" selected="selected">All Trims</option>
-    </select>
-</form>
-</body>
-</html> -->
+
