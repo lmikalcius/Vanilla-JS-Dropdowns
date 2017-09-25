@@ -124,33 +124,52 @@ var wholeMvisObject = {
 
 
 window.onload = function () {
+    var localStorageObject = {
+        stkType: "new",
+        make: "BMW",
+        model: "3-Series",
+        makeId: 20051,
+        maxPrice:"60000",
+        mileage: "93,318"
+    };
+
+    localStorage.setItem('Cars.userData', JSON.stringify(localStorageObject));
+
     var stockTypeSelect = document.getElementById("stockTypeSelect");
     var makeSelect = document.getElementById("makeSelect");
     var modelSelect = document.getElementById("modelSelect");
 
-    console.log(wholeMvisObject.stockTypes.length);
     for (var i = 0; i < wholeMvisObject.stockTypes.length; i++) {
-        stockTypeSelect.options[stockTypeSelect.options.length] = new Option(wholeMvisObject.stockTypes[i].nm, wholeMvisObject.stockTypes[i].nm);
+        var stockTypeName = wholeMvisObject.stockTypes[i].nm;
+        stockTypeSelect.options[i + 1] = new Option(stockTypeName, stockTypeName);
     }
 
     stockTypeSelect.onchange = function () {
         modelSelect.length = 1; // remove all options bar first
         makeSelect.length = 1; // remove all options bar first
         if (this.selectedIndex < 1) return; // done
-        for (var i = 0; i < wholeMvisObject.stockTypes[this.selectedIndex - 1].makes.length; i++) {
-            // console.log(usedVehiclesObject.makes[this.selectedIndex - 1].md);
-            // console.log(this.selectedIndex);
-            makeSelect.options[makeSelect.options.length] = new Option(wholeMvisObject.stockTypes[this.selectedIndex - 1].makes[i].nm, wholeMvisObject.stockTypes[this.selectedIndex - 1].makes[i].nm);
+
+        var makeListLength = wholeMvisObject.stockTypes[this.selectedIndex - 1].makes.length;
+        for (var i = 0; i < makeListLength; i++) {
+            var makeName = wholeMvisObject.stockTypes[this.selectedIndex - 1].makes[i].nm;
+            makeSelect.options[i + 1] = new Option(makeName, makeName);
         }
     }
     makeSelect.onchange = function () {
         modelSelect.length = 1; // remove all options bar first
         if (this.selectedIndex < 1) return; // done
-        for (var i = 0; i < wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md.length; i++) {
-            // console.log(usedVehiclesObject.makes[this.selectedIndex - 1].md);
-            // console.log(this.selectedIndex);
-            modelSelect.options[modelSelect.options.length] = new Option(wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md[i].nm, wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md[i].nm);
+
+        var modelListLength = wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md.length;
+        for (var i = 0; i < modelListLength; i++) {
+            var modelName = wholeMvisObject.stockTypes[stockTypeSelect.selectedIndex - 1].makes[this.selectedIndex - 1].md[i].nm;
+            modelSelect.options[i + 1] = new Option(modelName, modelName);
         }
     }
 
+    var presets = JSON.parse(localStorage.getItem('Cars.userData'));
+    stockTypeSelect.value = presets.stkType;
+    stockTypeSelect.onchange();
+    makeSelect.value = presets.make;
+    makeSelect.onchange();
+    modelSelect.value = presets.model;
 };
