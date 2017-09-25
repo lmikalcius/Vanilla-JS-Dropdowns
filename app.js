@@ -19441,8 +19441,7 @@ var wholeMvisObject = {
         ]
     }
 };
-
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
     var localStorageObject = {
         stkType: "new",
         make: "BMW",
@@ -19458,13 +19457,7 @@ window.onload = function () {
     var stockTypeSelect = document.getElementById("stockTypeSelect");
     var makeSelect = document.getElementById("makeSelect");
     var modelSelect = document.getElementById("modelSelect");
-    var selectShadow = document.createElement('select');
     var selectedStockType;
-
-    // for (var i = 0; i < wholeMvisObject.stockTypes.length; i++) {
-    //     var stockTypeName = wholeMvisObject.stockTypes[i].nm;
-    //     stockTypeSelect.options[i + 1] = new Option(stockTypeName, stockTypeName);
-    // }
 
     stockTypeSelect.onchange = function (event) {
         selectedStockType = event.target.value;
@@ -19502,4 +19495,4 @@ window.onload = function () {
     if (presets.modelId) {
         modelSelect.value = presets.modelId;
     }
-};
+});
