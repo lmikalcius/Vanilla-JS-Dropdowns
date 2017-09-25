@@ -19444,12 +19444,13 @@ var wholeMvisObject = {
 
 window.onload = function () {
     var localStorageObject = {
-        // stkType: "new",
-        // make: "BMW",
-        // model: "3-Series",
-        // makeId: 20051,
-        // maxPrice:"60000",
-        // mileage: "93,318"
+        stkType: "new",
+        make: "BMW",
+        model: "3-Series",
+        makeId: 20005,
+        modelId:26641,
+        maxPrice:"60000",
+        mileage: "93,318"
     };
 
     localStorage.setItem('Cars.userData', JSON.stringify(localStorageObject));
@@ -19493,12 +19494,12 @@ window.onload = function () {
 
     var presets = JSON.parse(localStorage.getItem('Cars.userData'));
     stockTypeSelect.value = presets.stkType || 'all';
-    stockTypeSelect.onchange({target: {value: "all"}});
-    if (presets.make) {
-        makeSelect.value = presets.make;
+    stockTypeSelect.onchange({target: {value: stockTypeSelect.value}});
+    if (presets.makeId) {
+        makeSelect.value = presets.makeId;
         makeSelect.onchange();
     }
-    if (presets.model) {
-        modelSelect.value = presets.model;
+    if (presets.modelId) {
+        modelSelect.value = presets.modelId;
     }
 };
